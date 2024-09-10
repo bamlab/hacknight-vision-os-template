@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "realitymoreshape",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/XanderXu/RealityMoreShape",
+      "state" : {
+        "revision" : "7f07f6333ec8848f6832b4b65db76649bc1e1023",
+        "version" : "0.9.3"
+      }
+    }
+  ],
+  "version" : 2
+}
