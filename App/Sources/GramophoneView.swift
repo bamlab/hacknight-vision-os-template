@@ -8,10 +8,16 @@ struct GramophoneView: View {
                 do {
                     let entity = try await Entity(contentsOf: usdzURL)
                     content.add(entity)
+                    
+                    entity.position = [0,-0.2,0]
                 } catch {
                     print("Failed to load USDZ file: \(error.localizedDescription)")
                 }
             }
+        } 
+        
+    placeholder: {
+            ProgressView()
         }
     }
 }

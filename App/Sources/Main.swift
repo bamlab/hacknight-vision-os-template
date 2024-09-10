@@ -7,16 +7,59 @@ enum Page: String, CaseIterable, Identifiable {
     case taurus
     case ball
     case gramophone
+    case immersiveView
 }
 
 @main
-struct Main: App {
+struct ImmersiveSpaceApp: App {
+
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView2()
+
+        }
+
+        ImmersiveSpace(id: "ImmersiveSpace") {
+            ImmersiveMeditationBuilder()
+
+        }
+        .immersionStyle(selection: .constant(.full), in:  .full)
+    }
+}
+
+struct ContentView2: View {
+
+    @State private var isImmersiveSpaceOpened = false
+
+    @Environment(\.openImmersiveSpace) var openImmersiveSpace
+    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+
+    var body: some View {
+        Button(isImmersiveSpaceOpened ? "Exit Immersive Space" : "Show Immersive Space", role: isImmersiveSpaceOpened ? .destructive : .none) {
+            Task {
+                if isImmersiveSpaceOpened {
+                    await dismissImmersiveSpace()
+                    isImmersiveSpaceOpened = false
+                } else {
+                    let result = await openImmersiveSpace(id: "ImmersiveSpace")
+                    if result == .opened {
+                        isImmersiveSpaceOpened = true
+                    }
+                }
+            }
         }
     }
 }
+
+//@main
+//struct Main: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            ContentView()
+//        }
+//    }
+//}
 
 struct ContentView: View {
     @State var selectedPage: Page = .hello
@@ -43,6 +86,7 @@ struct ContentView: View {
             case .ball: SimpleBallView()
             case .hello: HelloView()
             case .gramophone: GramophoneView()
+            case .immersiveView: ImmersiveView()
             }
         }
     }
@@ -55,3 +99,4 @@ struct ContentView: View {
 #Preview(windowStyle: .automatic) {
     ContentView()
 }
+

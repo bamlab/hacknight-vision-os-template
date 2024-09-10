@@ -6,7 +6,7 @@ let project = Project(
     name: name,
     packages: [
         .local(path: "Packages/SimpleBall"),
-        .remote(url: "https://github.com/XanderXu/RealityMoreShape", requirement: .exact("0.9.3")),
+//        .remote(url: "https://github.com/XanderXu/RealityMoreShape", requirement: .exact("0.9.3")),
     ],
     targets: [
         .target(
@@ -19,7 +19,7 @@ let project = Project(
             resources: ["App/Resources/**"],
             dependencies: [
                 .package(product: "SimpleBall"),
-                .package(product: "RealityMoreShape"),
+//                .package(product: "RealityMoreShape"),
             ]
         ),
     ]
